@@ -34,7 +34,7 @@ public class ClassClient {
             	System.out.print("Client: ");
                 
                 String msg_to_send = s.nextLine();
-                buffw.write(cs.cesaserEncoding(msg_to_send,3));
+                buffw.write(cs.ceaserEncoding(msg_to_send,3));
                 buffw.newLine();
                 buffw.flush();
                 
