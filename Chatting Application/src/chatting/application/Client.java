@@ -111,7 +111,7 @@ public class Client implements ActionListener{
         a1.add(vertical, BorderLayout.PAGE_START);
         
         try {
-            output = c.ceaserEncoding(output, 3);
+            output = c.ceaserEncoding(output, output.length());
             System.out.println("Client: (Encrypted) "+output);
             dout.writeUTF(output);
             
@@ -155,13 +155,14 @@ public class Client implements ActionListener{
         
         try{
             Socket s = new Socket("localhost", 6001);
+            System.out.println("Connected...\n");
             DataInputStream din = new DataInputStream(s.getInputStream());
             dout = new DataOutputStream(s.getOutputStream());
             while(true){
                     a1.setLayout(new BorderLayout());
                     String servermsg = din.readUTF();
                     System.out.println("Server: (Encrypted) "+servermsg);
-                    servermsg = c.ceaserDecoding(servermsg, 3);
+                    servermsg = c.ceaserDecoding(servermsg, servermsg.length());
                     JPanel panel = formatLabel(servermsg);
                     
                     JPanel left = new JPanel(new BorderLayout());
