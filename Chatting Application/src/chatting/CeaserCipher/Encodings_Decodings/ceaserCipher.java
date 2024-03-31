@@ -14,6 +14,8 @@ public class ceaserCipher {
             else if(ch>=' ' && ch<='/'){
                 enc.append((char)(((ch-32 +key)%16)+32));
             }
+            else if(ch>='0' && ch<='9')
+                enc.append((char)(((ch+key)%10)+48));
             else
                 enc.append(ch);
         }
@@ -46,16 +48,17 @@ public class ceaserCipher {
             }
             else if(ch>=' ' && ch<='/')
                 enc.append((char)(((ch-32-key)%16)+32));
+            else if(ch>='0' && ch<='9')
+                enc.append((char)(((ch-key)%10)+48));
             else
                 enc.append(ch);
         }
         return enc.toString();
     }
 
-    /* public static void main(String[] args) {
-        CeaserCipher c = new CeaserCipher();
-        System.out.println(c.ceaserEncoding("ABC",3));
-        System.out.println(c.ceaserDecoding("DEF",3));
-        }
-        */
+     public static void main(String[] args) {
+        ceaserCipher c = new ceaserCipher();
+        System.out.println(c.ceaserEncoding("01239",5));
+        System.out.println(c.ceaserDecoding("34569",5));
+    }     
 }
