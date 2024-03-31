@@ -113,7 +113,7 @@ public class Server implements ActionListener{
         a1.add(vertical, BorderLayout.PAGE_START);
         
         try {
-            output = c.ceaserEncoding(output, 3);
+            output = c.ceaserEncoding(output, output.length());
             System.out.println("Server: (Encrypted) "+output);
             dout.writeUTF(output);
         } catch (IOException ex) {
@@ -156,14 +156,16 @@ public class Server implements ActionListener{
         c = new ceaserCipher();
         try{
             ServerSocket skt = new ServerSocket(6001);
+            System.out.println("Waiting for connection...");
             while(true){
                 Socket s = skt.accept();
+                System.out.println("Connected...\n");
                 DataInputStream din = new DataInputStream(s.getInputStream());
                 dout = new DataOutputStream(s.getOutputStream());
                 while(true){
                     String clientmsg = din.readUTF();
                     System.out.println("Client: (Encrypted) "+clientmsg);
-                    clientmsg = c.ceaserDecoding(clientmsg, 3);
+                    clientmsg = c.ceaserDecoding(clientmsg, clientmsg.length());
                     JPanel panel = formatLabel(clientmsg);
                     
                     JPanel left = new JPanel(new BorderLayout());
